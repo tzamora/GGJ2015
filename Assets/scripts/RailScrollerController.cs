@@ -52,23 +52,25 @@ public class RailScrollerController : MonoBehaviour {
 
 			if(!currentRail.transform.GetBounds().IsVisibleFrom(Camera.main))
 			{
-				transform.position =
-					transform.position + (railWidth);
+				print("nos salimos de esta vara");
+
+				currentRail.transform.position =
+					rails[rails.Length-1].transform.position + (railWidth);
 
 				//
 				// swap the backgrounds
 				//
 
 
-//				//background1 = background2;
-//				rails[0] = rails[1];
-//
-//				//background2 = currentRail;
-//
-//				rails[1] = currentRail;
-//
-//				//currentRail = background1;
-//				currentRail = rails[0];
+				//background1 = background2;
+				rails[0] = rails[1];
+				rails[1] = rails[2];
+				rails[2] = rails[3];
+				rails[3] = rails[4];
+				rails[4] = currentRail;
+
+				//currentRail = background1;
+				currentRail = rails[0];
 
 			}
 		}
