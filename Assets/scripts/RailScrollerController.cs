@@ -34,6 +34,10 @@ public class RailScrollerController : MonoBehaviour {
 
 		while(true)
 		{
+			//
+
+			ScrollingSpeed = GameContext.Get.background.ScrollingSpeed;
+
 			for (int i = 0; i < rails.Length; i++) {
 
 				rails[i].transform.Translate(ScrollingSpeed * Time.deltaTime, 0f, 0f);
