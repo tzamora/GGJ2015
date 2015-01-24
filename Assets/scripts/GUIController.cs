@@ -10,7 +10,7 @@ public class GUIController : MonoBehaviour {
 
 	public void ShowGameOver(){
 
-
+		GameOverView.SetActive(true);
 
 	}
 }

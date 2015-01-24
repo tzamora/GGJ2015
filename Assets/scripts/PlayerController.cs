@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour {
 		DieTriggerController dieTrigger = theOther.GetComponent<DieTriggerController>();
 
 		if (dieTrigger) {
-		
+
 			Die();
 
 		}
@@ -154,11 +154,9 @@ public class PlayerController : MonoBehaviour {
 		// wait a few seconds
 		// show gameover screen
 
+		this.ttAppend ("DieRoutine", delegate(ttHandler handler){
 
-
-		this.ttAppend (delegate(ttHandler handler){
-
-			gameObject.GetComponent<SpriteRenderer>().enabled = false;;
+			gameObject.GetComponent<SpriteRenderer>().enabled = false;
 
 		}).ttAppend(1f).ttAppend(delegate(ttHandler handler){
 
