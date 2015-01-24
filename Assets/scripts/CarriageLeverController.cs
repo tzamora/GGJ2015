@@ -26,6 +26,8 @@ public class CarriageLeverController : MonoBehaviour {
 
 		SetBackgroundSpeedRoutine ();
 
+		MovePlayerRoutine ();
+
 	}
 
 	void SetGUICounterRoutine (){
@@ -35,6 +37,12 @@ public class CarriageLeverController : MonoBehaviour {
 			GameContext.Get.GUI.counterText.text = leverPushCounter+"";
 
 		});
+
+	}
+
+	void MovePlayerRoutine(){
+
+
 
 	}
 

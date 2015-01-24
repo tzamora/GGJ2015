@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 	
 	private CharacterController2D _controller;
 	private RaycastHit2D _lastControllerColliderHit;
-	private Vector3 _velocity;
+	public Vector3 _velocity;
 
 	void Awake()
 	{
@@ -112,7 +112,25 @@ public class PlayerController : MonoBehaviour {
 			gun.Shoot( new Vector3(side, 0f, 0f ) );
 		
 		}
+	}
 
+	void OnTriggerEnter2D(Collider2D theOther) {
+
+//		if (theOther is RailController) {
+//		
+//			_velocity.x = Mathf.Lerp( _velocity.x, -100f, Time.deltaTime );
+//		
+//		}
+
+	}
+
+	void RailFallRoutine(){
+
+//		this.ttAppendLoop ("RailFallRoutine", delegate(){
+//
+//			_velocity.x = Mathf.Lerp( _velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor );
+//
+//		});
 
 	}
 }
