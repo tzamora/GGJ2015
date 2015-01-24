@@ -124,6 +124,8 @@ public class PlayerController : MonoBehaviour {
 		
 		}
 
+
+
 	}
 
 	void OnTriggerExit2D(Collider2D theOther) {
@@ -138,13 +140,8 @@ public class PlayerController : MonoBehaviour {
 		
 	}
 
-	void RailFallRoutine(){
-
-//		this.ttAppendLoop ("RailFallRoutine", delegate(){
-//
-//			_velocity.x = Mathf.Lerp( _velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor );
-//
-//		});
+	void Die(){
 
 	}
+	
 }

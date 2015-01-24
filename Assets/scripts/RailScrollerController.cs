@@ -70,8 +70,7 @@ public class RailScrollerController : MonoBehaviour {
 				rails[0] = rails[1];
 				rails[1] = rails[2];
 				rails[2] = rails[3];
-				rails[3] = rails[4];
-				rails[4] = currentRail;
+				rails[3] = currentRail;
 
 				//currentRail = background1;
 				currentRail = rails[0];
