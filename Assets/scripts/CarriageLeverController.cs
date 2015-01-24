@@ -11,62 +11,74 @@ public class CarriageLeverController : MonoBehaviour {
 
 	public bool leverIsLeft = false;
 
+	public int leverPushCounter = 0;
+
 	// Use this for initialization
 	void Start () {
 	
+		PushLeverRoutine ();
+
+		SetGUICounterRoutine ();
+
+		ReduceCounterRoutine ();
+
+	}
+
+	void SetGUICounterRoutine (){
+
+		this.ttAppendLoop ("SetGUICounterRoutine", delegate(ttHandler handler) {
+
+			GameContext.Get.GUI.counterText.text = leverPushCounter+"";
+
+		});
+
+	}
+
+	void ReduceCounterRoutine(){
+
+		this.ttAppendLoop ("PumpLeverRoutine", delegate(ttHandler handler) {
+		
+			handler.WaitFor(0.3f);
+
+			leverPushCounter--;
+		
+		});
+
+	}
+
+	void PushLeverRoutine(){
+
 		this.ttAppendLoop ("PumpLeverRoutine", delegate(ttHandler handler){
 
-//			this.ttAppend("pumpLeft", delegate(){
+			if(LeftTrigger.onEnter){
+				
+				if(Input.GetKeyDown(KeyCode.A)){
 
-				if(LeftTrigger.onEnter){
+				leverPushCounter++;
 					
-					if(Input.GetKeyDown(KeyCode.A)){
+					if(leverIsLeft){
 						
-						if(leverIsLeft){
-							
-							leverPivot.rotation = Quaternion.Euler(new Vector3(0f, 0f, -20f));
-							
-							leverIsLeft = false;
-							
-						}else{
-							
-							leverPivot.rotation = Quaternion.Euler(new Vector3(0f, 0f, 20f));
-							
-							leverIsLeft = true;
-							
-						}
+						leverPivot.rotation = Quaternion.Euler(new Vector3(0f, 0f, -20f));
+						
+						leverIsLeft = false;
+						
+					}else{
+						
+						leverPivot.rotation = Quaternion.Euler(new Vector3(0f, 0f, 20f));
+						
+						leverIsLeft = true;
 						
 					}
 					
 				}
-
-//			}).ttLock();
-
-//			if(LeftTrigger.onEnter){
-//
-//				if(Input.GetKeyDown(KeyCode.A)){
-//
-//					if(leverIsLeft){
-//
-//						leverPivot.rotation = Quaternion.Euler(new Vector3(0f, 0f, -20f));
-//						
-//						leverIsLeft = false;
-//					
-//					}else{
-//					
-//						leverPivot.rotation = Quaternion.Euler(new Vector3(0f, 0f, 20f));
-//						
-//						leverIsLeft = true;
-//					
-//					}
-//
-//				}
-
-//			}
+				
+			}
 
 			if(RightTrigger.onEnter){
 				
 				if(Input.GetKeyDown(KeyCode.A)){
+
+					leverPushCounter++;
 					
 					if(leverIsLeft){
 						

@@ -7,6 +7,8 @@ public class GameContext : MonoSingleton<GameContext> {
 
 	public BackgroundScrollerController background;
 
+	public GUIController GUI;
+
 	// Use this for initialization
 	void Awake () {
 	
