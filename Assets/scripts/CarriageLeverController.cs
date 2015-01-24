@@ -13,6 +13,8 @@ public class CarriageLeverController : MonoBehaviour {
 
 	public int leverPushCounter = 0;
 
+	public int maxCounter = 15;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -21,6 +23,8 @@ public class CarriageLeverController : MonoBehaviour {
 		SetGUICounterRoutine ();
 
 		ReduceCounterRoutine ();
+
+		SetBackgroundSpeedRoutine ();
 
 	}
 
@@ -36,11 +40,13 @@ public class CarriageLeverController : MonoBehaviour {
 
 	void ReduceCounterRoutine(){
 
-		this.ttAppendLoop ("PumpLeverRoutine", delegate(ttHandler handler) {
+		this.ttAppendLoop ("ReduceCounterRoutine", delegate(ttHandler handler) {
 		
 			handler.WaitFor(0.3f);
 
 			leverPushCounter--;
+
+			leverPushCounter = Mathf.Clamp(leverPushCounter, 0, 15);
 		
 		});
 
@@ -55,6 +61,8 @@ public class CarriageLeverController : MonoBehaviour {
 				if(Input.GetKeyDown(KeyCode.A)){
 
 				leverPushCounter++;
+
+					leverPushCounter = Mathf.Clamp(leverPushCounter, 0, 15);
 					
 					if(leverIsLeft){
 						
@@ -79,6 +87,8 @@ public class CarriageLeverController : MonoBehaviour {
 				if(Input.GetKeyDown(KeyCode.A)){
 
 					leverPushCounter++;
+
+					leverPushCounter = Mathf.Clamp(leverPushCounter, 0, 15);
 					
 					if(leverIsLeft){
 						
@@ -99,6 +109,18 @@ public class CarriageLeverController : MonoBehaviour {
 			}
 
 
+		});
+
+	}
+
+	void SetBackgroundSpeedRoutine (){
+
+		this.ttAppendLoop ("SetBackgroundSpeedRoutine", delegate(ttHandler handler) {
+		
+			float t = Mathf.InverseLerp(0, 15, leverPushCounter);
+
+			GameContext.Get.background.ScrollingSpeed = -Mathf.Lerp(0f, 10f, t);
+		
 		});
 
 	}
