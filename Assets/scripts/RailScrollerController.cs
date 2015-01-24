@@ -52,8 +52,6 @@ public class RailScrollerController : MonoBehaviour {
 
 			if(!currentRail.transform.GetBounds().IsVisibleFrom(Camera.main))
 			{
-				print("nos salimos de esta vara");
-
 				transform.position =
 					transform.position + (railWidth);
 

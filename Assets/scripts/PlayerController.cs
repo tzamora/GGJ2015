@@ -116,12 +116,26 @@ public class PlayerController : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D theOther) {
 
-//		if (theOther is RailController) {
-//		
-//			_velocity.x = Mathf.Lerp( _velocity.x, -100f, Time.deltaTime );
-//		
-//		}
+		RailController rail = theOther.transform.parent.GetComponent<RailController> ();
 
+		if (rail!=null) {
+		
+			transform.parent = rail.transform;
+		
+		}
+
+	}
+
+	void OnTriggerExit2D(Collider2D theOther) {
+		
+		RailController rail = theOther.transform.parent.GetComponent<RailController> ();
+		
+		if (rail!=null) {
+			
+			transform.parent = null;
+			
+		}
+		
 	}
 
 	void RailFallRoutine(){
