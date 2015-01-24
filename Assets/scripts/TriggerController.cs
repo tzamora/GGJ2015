@@ -4,8 +4,9 @@ using System.Collections;
 public class TriggerController : MonoBehaviour {
 
 	public bool onEnter = false;
+	public bool onExit = false;
 
-	public Collider2D other = false;
+	public Collider2D other = null;
 
 	void OnTriggerEnter2D(Collider2D theOther) {
 		onEnter = true;
@@ -13,7 +14,9 @@ public class TriggerController : MonoBehaviour {
 	}
 
 	void OnTriggerExit2D(Collider2D theOther) {
-		onEnter = theOther;
+		onEnter = false;
+		onExit = true;
+		other = null;
 	}
 
 }
