@@ -124,6 +124,13 @@ public class PlayerController : MonoBehaviour {
 		
 		}
 
+		DieTriggerController dieTrigger = theOther.GetComponent<DieTriggerController>();
+
+		if (dieTrigger) {
+		
+			Die();
+
+		}
 
 
 	}
@@ -141,6 +148,25 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Die(){
+
+		// first show a die animation
+		// then disapear
+		// wait a few seconds
+		// show gameover screen
+
+
+
+		this.ttAppend (delegate(ttHandler handler){
+
+			gameObject.GetComponent<SpriteRenderer>().enabled = false;;
+
+		}).ttAppend(1f).ttAppend(delegate(ttHandler handler){
+
+			GameContext.Get.GUI.ShowGameOver();
+
+		});
+
+
 
 	}
 	
