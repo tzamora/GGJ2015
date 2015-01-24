@@ -14,13 +14,13 @@ public class GunController : MonoBehaviour {
 
 	}
 
-	public void Shoot(){
+	public void Shoot(Vector3 direction){
 
 		GameObject bulletGO = (GameObject)GameObject.Instantiate (bulletPrefab.gameObject, transform.position, Quaternion.identity);
 
 		Rigidbody2D bulletRigidbody = bulletGO.GetComponent<Rigidbody2D> ();
 
-		bulletRigidbody.velocity = new Vector3 (GameContext.Get.player.side *  1f, 0f, 0f) * force ;
+		bulletRigidbody.velocity = direction * force ;
 
 	}
 }

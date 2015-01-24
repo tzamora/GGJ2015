@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour {
 
 		if (Input.GetKey (KeyCode.Space)) {
 		
-			gun.Shoot();
+			gun.Shoot( new Vector3(side, 0f, 0f ) );
 		
 		}
 
