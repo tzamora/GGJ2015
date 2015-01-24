@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
 	public float groundDamping = 20f; // how fast do we change direction? higher means faster
 	public float inAirDamping = 5f;
 	public float jumpHeight = 3f;
+	public int side = 0;
 	
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -44,16 +45,16 @@ public class PlayerController : MonoBehaviour {
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
 	void move()
 	{
-		print (_controller.velocity);
-
 		// grab our current _velocity to use as a base for all calculations
-		_velocity = _controller.velocity;
+			_velocity = _controller.velocity;
 		
 		if( _controller.isGrounded )
 			_velocity.y = 0;
 		
 		if( Input.GetKey( KeyCode.RightArrow ) )
 		{
+			side = 1;
+
 			normalizedHorizontalSpeed = 1;
 			if( transform.localScale.x < 0f )
 				transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
@@ -65,6 +66,8 @@ public class PlayerController : MonoBehaviour {
 		}
 		else if( Input.GetKey( KeyCode.LeftArrow ) )
 		{
+			side = -1;
+
 			normalizedHorizontalSpeed = -1;
 			if( transform.localScale.x > 0f )
 				transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );

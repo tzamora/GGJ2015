@@ -20,7 +20,7 @@ public class GunController : MonoBehaviour {
 
 		Rigidbody2D bulletRigidbody = bulletGO.GetComponent<Rigidbody2D> ();
 
-		bulletRigidbody.velocity = new Vector3 (1f, 0f, 0f) * force;
+		bulletRigidbody.velocity = new Vector3 (GameContext.Get.player.side *  1f, 0f, 0f) * force ;
 
 	}
 }
