@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -27,7 +27,7 @@ public class IntroductionFlowController : MonoBehaviour {
 
 		startButton.onClick.AddListener (delegate() {
 		
-			Application.LoadLevel("main");
+			Application.LoadLevel("story");
 		
 		});
 
