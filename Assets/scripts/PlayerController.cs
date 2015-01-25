@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour {
 	public float jumpHeight = 3f;
 	public int side = 0;
 
-	public int health = 3;
+	public int health;
 	
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Start(){
+
+		health = 6;
 
 		this.ttAppendLoop ("MoveRoutine",delegate(ttHandler handler){
 
@@ -233,16 +235,21 @@ public class PlayerController : MonoBehaviour {
 
 		this.ttAppend ("DieRoutine", delegate(ttHandler handler){
 
-			SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+			/*SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 
 			if (spriteRenderer != null)
 			{
 				spriteRenderer.enabled = false;
-			}
+			}*/
 
-		}).ttAppend(1f).ttAppend(delegate(ttHandler handler){
+			GameContext.Get.GUI.ShowGameOver();
 
-			GameContext.Get.GUI.ShowGameOver();	
+			gameObject.SetActive(false);
+
+
+		//}).ttAppend(1f).ttAppend(delegate(ttHandler handler){
+
+		//	GameContext.Get.GUI.ShowGameOver();	
 
 		});
 
