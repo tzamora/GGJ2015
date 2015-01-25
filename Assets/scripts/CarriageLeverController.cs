@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using InControl;
+using System;
 
 public class CarriageLeverController : MonoBehaviour {
 
@@ -28,6 +29,8 @@ public class CarriageLeverController : MonoBehaviour {
 	public List<EnemyController> enemiesInCarriage;
 
 	public GameObject[] explosions;
+
+	public Action OnDie;
 
 	// Use this for initialization
 	void Start () {
@@ -225,8 +228,6 @@ public class CarriageLeverController : MonoBehaviour {
 			
 			enemiesInCarriage[i].OnDie += delegate() {
 				
-				print ("SE MURIO");
-				
 				enemiesInCarriage.RemoveAt(enemiesInCarriage.Count - 1);
 				
 			};
@@ -236,24 +237,34 @@ public class CarriageLeverController : MonoBehaviour {
 		while (true) {
 
 			yield return true;
-			
+			// esta linea de codigo se ejecuta hasta en el siguente frame
+
 			if(enemiesInCarriage.Count <= 0){
+
+				print ("ya estan todos muertos");
 				
-				for (int i = 0; i < explosions.Length; i++) {
-					
-					ParticleSystem pSystem = explosions[i].GetComponent<ParticleSystem>();
-					
-					pSystem.Play();
-					
-					Destroy (pSystem.gameObject, pSystem.duration);
-					
-					yield return new WaitForSeconds(0.4f);
-					
-				}
+//				for (int i = 0; i < explosions.Length; i++) {
+//					
+//					ParticleSystem pSystem = explosions[i].GetComponent<ParticleSystem>();
+//					
+//					pSystem.Play();
+//					
+//					Destroy (pSystem.gameObject, pSystem.duration);
+//					
+//					yield return new WaitForSeconds(0.4f);
+//					
+//				}
 
 				break;
 
 			}
+		}
+
+
+		if (OnDie != null) {
+		
+			OnDie();
+		
 		}
 
 		Destroy (this.gameObject);

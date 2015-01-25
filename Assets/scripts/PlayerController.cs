@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 	public float groundDamping = 20f; // how fast do we change direction? higher means faster
 	public float inAirDamping = 5f;
 	public float jumpHeight = 3f;
-	public int side = 0;
+	public int side = 1;
 
 	public int health;
 	
@@ -119,36 +119,36 @@ public class PlayerController : MonoBehaviour {
 			// listen the shoot action
 			if( InputManager.Devices[0].Action3 || Input.GetKey(KeyCode.Z))
 			{
-				int vDirection = 0;
+//				int vDirection = 0;
+//				
+//				if(InputManager.ActiveDevice.Direction.Up || Input.GetKey(KeyCode.UpArrow)){
+//					
+//					vDirection = 1;
+//					
+//				}else if(InputManager.ActiveDevice.Direction.Down || Input.GetKey(KeyCode.DownArrow)){
+//					
+//					vDirection = -1;
+//					
+//				}
+//				
+//				int hDirection = 1;
+//				
+//				if(InputManager.ActiveDevice.Direction.Left || Input.GetKey(KeyCode.LeftArrow)){
+//					
+//					hDirection = -1;
+//					
+//				}else if(InputManager.ActiveDevice.Direction.Right || Input.GetKey(KeyCode.RightArrow)){
+//					
+//					hDirection = 1;
+//					
+//				}
+//				
+//				if(hDirection == 0 && vDirection == 0)
+//				{
+//					hDirection = side;
+//				}
 				
-				if(InputManager.ActiveDevice.Direction.Up || Input.GetKey(KeyCode.UpArrow)){
-					
-					vDirection = 1;
-					
-				}else if(InputManager.ActiveDevice.Direction.Down || Input.GetKey(KeyCode.DownArrow)){
-					
-					vDirection = -1;
-					
-				}
-				
-				int hDirection = 1;
-				
-				if(InputManager.ActiveDevice.Direction.Left || Input.GetKey(KeyCode.LeftArrow)){
-					
-					hDirection = -1;
-					
-				}else if(InputManager.ActiveDevice.Direction.Right || Input.GetKey(KeyCode.RightArrow)){
-					
-					hDirection = 1;
-					
-				}
-				
-				if(hDirection == 0 && vDirection == 0)
-				{
-					hDirection = side;
-				}
-				
-				gun.Shoot(new Vector3(hDirection, vDirection));
+				gun.Shoot(new Vector3(side, 0f));
 				
 				loop.WaitFor(0.1f);
 			}
