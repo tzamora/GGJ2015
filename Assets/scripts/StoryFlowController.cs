@@ -26,7 +26,7 @@ public class StoryFlowController : MonoBehaviour {
 
 	void StoryRoutine(){
 
-		this.ttAppend (frameDuration).ttAppend (delegate() {
+		this.ttAppend (delegate() {
 
 						photos [0].SetActive (true);
 			
@@ -45,13 +45,13 @@ public class StoryFlowController : MonoBehaviour {
 						photos [2].SetActive (false);
 						photos [3].SetActive (true);
 			
-				}).ttAppend (frameDuration, delegate() {
+				}).ttAppend (frameDuration/2, delegate() {
 				
 						photos [2].SetActive (false);
 						photos [3].SetActive (true);
 				
 				})
-				.ttAppend (frameDuration, delegate() {
+				.ttAppend (0, delegate() {
 					
 					Application.LoadLevel("main");
 

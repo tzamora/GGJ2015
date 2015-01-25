@@ -53,6 +53,8 @@ public class IntroductionFlowController : MonoBehaviour {
 
 		.ttAppend (2.5f).ttAppend (delegate() {
 			
+			jamText.gameObject.SetActive (false);
+
 			SoundManager.Get.PlayClip (photosSound, false);
 			
 			photos [0].SetActive (true);
