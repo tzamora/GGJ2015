@@ -29,6 +29,10 @@ public class PlayerController : MonoBehaviour {
 	private RaycastHit2D _lastControllerColliderHit;
 	public Vector3 _velocity;
 
+	public AudioClip jumpSound;
+
+	public AudioClip shootSound;
+
 	void Awake()
 	{
 		_controller = GetComponent<CharacterController2D>();
@@ -100,6 +104,8 @@ public class PlayerController : MonoBehaviour {
 		{
 			_velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
 			animator.Play( Animator.StringToHash( "animation_jump" ) );
+
+			SoundManager.Get.PlayClip(jumpSound, false);
 		}
 		
 		// apply horizontal speed smoothing it

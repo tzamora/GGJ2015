@@ -41,8 +41,11 @@ public class CarriageLeverController : MonoBehaviour {
 		
 			AppearanceRoutine ();
 
-			StartCoroutine( ExplodeWhenEmptyRoutine ());
+			StartCoroutine (ExplodeWhenEmptyRoutine ());
 
+		} else {
+				
+			SetBackgroundSpeedRoutine ();
 		}
 	
 		PushLeverRoutine ();
@@ -53,7 +56,7 @@ public class CarriageLeverController : MonoBehaviour {
 
 		ReduceCounterRoutine ();
 
-		SetBackgroundSpeedRoutine ();
+
 
 		MoveWheelsRoutine ();
 
@@ -285,7 +288,9 @@ public class CarriageLeverController : MonoBehaviour {
 
 			}
 
-			GameContext.Get.background.ScrollingSpeed = -Mathf.Lerp(0f, 10f, t);
+			GameContext.Get.background.ScrollingSpeed = -Mathf.Lerp(0f, 10f, t) * 0.5f;
+
+			GameContext.Get.backgroundFore.ScrollingSpeed = -Mathf.Lerp(0f, 10f, t);
 		
 		});
 

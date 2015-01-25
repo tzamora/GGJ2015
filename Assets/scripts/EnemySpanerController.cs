@@ -53,6 +53,12 @@ public class EnemySpanerController : MonoBehaviour {
 
 					carriageGO2.GetComponent<CarriageLeverController>().side = 1;
 
+					carriageGO2.GetComponent<CarriageLeverController>().OnDie += delegate() {
+
+						SpawnRavenRoutine();
+
+					};
+
 				};
 
 

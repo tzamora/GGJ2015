@@ -36,7 +36,7 @@ public class RailScrollerController : MonoBehaviour {
 		{
 			//
 
-			ScrollingSpeed = GameContext.Get.background.ScrollingSpeed;
+			ScrollingSpeed = GameContext.Get.backgroundFore.ScrollingSpeed;
 
 			for (int i = 0; i < rails.Length; i++) {
 

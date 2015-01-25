@@ -9,6 +9,8 @@ public class GameContext : MonoSingleton<GameContext> {
 
 	public BackgroundScrollerController background;
 
+	public BackgroundScrollerController backgroundFore;
+
 	public GUIController GUI;
 
 	public SoundManager soundManager;
