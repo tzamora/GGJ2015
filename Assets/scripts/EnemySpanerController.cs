@@ -51,6 +51,7 @@ public class EnemySpanerController : MonoBehaviour {
 
 				GameObject carriageGO = (GameObject) GameObject.Instantiate (enemyCarriagePrefab.gameObject, carriageSpawnRightPoint.position, Quaternion.identity);
 
+				//carriageGO2.GetComponent<CarriageLeverController>().side = 1;
 
 				carriageGO.GetComponent<CarriageLeverController>().OnDie += delegate(){
 
@@ -61,6 +62,8 @@ public class EnemySpanerController : MonoBehaviour {
 					carriageGO2.transform.localScale = new Vector3(-1f, 1f, 1f);
 
 					carriageGO2.GetComponent<CarriageLeverController>().side = 1;
+
+					carriageGO2.GetComponent<CarriageLeverController>().enemiesInCarriage[0].side = 1;
 
 					carriageGO2.GetComponent<CarriageLeverController>().OnDie += delegate() {
 
