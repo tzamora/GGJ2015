@@ -45,7 +45,11 @@ public class IntroductionFlowController : MonoBehaviour {
 			
 			jamText.gameObject.SetActive (true);
 			
-		}).ttAppend (2.5f).ttAppend (delegate() {
+		})
+
+
+
+		.ttAppend (2.5f).ttAppend (delegate() {
 			
 			SoundManager.Get.PlayClip (photosSound, false);
 			
@@ -63,12 +67,28 @@ public class IntroductionFlowController : MonoBehaviour {
 			
 			photos [3].SetActive (true);
 			
-		}).ttAppend(4f).ttAppend(delegate(ttHandler handler){
+		})
+
+
+		.ttAppend (2f, delegate() {
+					photos [0].SetActive (false);
+					photos [1].SetActive (false);
+					photos [2].SetActive (false);
+					photos [3].SetActive (false);
+
+					photos [4].SetActive (true);
+					photos [5].SetActive (true);
+					photos [6].SetActive (true);
+					photos [7].SetActive (true);
+		})
 			
-			photos[0].SetActive(false);
-			photos[1].SetActive(false);
-			photos[2].SetActive(false);
-			photos[3].SetActive(false);
+
+		.ttAppend(4f).ttAppend(delegate(ttHandler handler){
+			
+			photos[4].SetActive(false);
+			photos[5].SetActive(false);
+			photos[6].SetActive(false);
+			photos[7].SetActive(false);
 			
 			jamText.gameObject.SetActive(false);
 			
