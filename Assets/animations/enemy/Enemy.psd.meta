@@ -1,0 +1,113 @@
+fileFormatVersion: 2
+guid: 2b96301d69c63ab409e89e510eabf9ae
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Enemy_0
+    21300002: Enemy_1
+    21300004: Enemy_2
+    21300006: Enemy_3
+    21300008: Enemy_4
+    21300010: Enemy_5
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Enemy_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 185
+        width: 90
+        height: 111
+      alignment: 9
+      pivot: {x: .456132174, y: .0680961236}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Enemy_1
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 235
+        width: 25
+        height: 62
+      alignment: 9
+      pivot: {x: .590242922, y: .836590171}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Enemy_2
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 230
+        width: 44
+        height: 63
+      alignment: 9
+      pivot: {x: .33335945, y: .902868867}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Enemy_3
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 94
+        width: 25
+        height: 62
+      alignment: 9
+      pivot: {x: .590242743, y: .836590171}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Enemy_4
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 82
+        width: 53
+        height: 96
+      alignment: 9
+      pivot: {x: .372298628, y: .0946137086}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Enemy_5
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 152
+        width: 44
+        height: 63
+      alignment: 9
+      pivot: {x: .307721913, y: .89391607}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 

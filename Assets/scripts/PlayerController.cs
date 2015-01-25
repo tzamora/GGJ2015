@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour {
 
 	public AudioClip damageSound;
 
+	public Animator animator;
+
 	// movement config
 	public float gravity = -25f;
 	public float runSpeed = 8f;
@@ -63,7 +65,7 @@ public class PlayerController : MonoBehaviour {
 				transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
 			
 			if( _controller.isGrounded ){
-				//_animator.Play( Animator.StringToHash( "Run" ) );
+				animator.Play( Animator.StringToHash( "walk" ) );
 			}
 				
 		}
@@ -76,7 +78,7 @@ public class PlayerController : MonoBehaviour {
 				transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z );
 			
 			if( _controller.isGrounded ){
-				//_animator.Play( Animator.StringToHash( "Run" ) );
+				animator.Play( Animator.StringToHash( "walk" ) );
 			}
 				
 		}
@@ -85,7 +87,7 @@ public class PlayerController : MonoBehaviour {
 			normalizedHorizontalSpeed = 0;
 			
 			if( _controller.isGrounded ){
-				//_animator.Play( Animator.StringToHash( "Idle" ) );
+				animator.Play( Animator.StringToHash( "animation_idle" ) );
 			}
 				
 		}
@@ -95,7 +97,7 @@ public class PlayerController : MonoBehaviour {
 		if( _controller.isGrounded && (Input.GetKeyDown( KeyCode.X ) || InputManager.Devices[0].Action1) )
 		{
 			_velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
-			//_animator.Play( Animator.StringToHash( "Jump" ) );s
+			animator.Play( Animator.StringToHash( "animation_jump" ) );
 		}
 		
 		// apply horizontal speed smoothing it
@@ -177,9 +179,6 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		EnemyBulletController enemyBullet = theOther.GetComponent<EnemyBulletController>();
-
-		print ("3333");
-
 		if (enemyBullet != null) {
 
 			health--;
@@ -235,10 +234,12 @@ public class PlayerController : MonoBehaviour {
 		this.ttAppend ("DieRoutine", delegate(ttHandler handler){
 
 			SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+
 			if (spriteRenderer != null)
 			{
 				spriteRenderer.enabled = false;
 			}
+
 		}).ttAppend(1f).ttAppend(delegate(ttHandler handler){
 
 			GameContext.Get.GUI.ShowGameOver();	
