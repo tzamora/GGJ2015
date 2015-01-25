@@ -8,9 +8,7 @@ public class PlayerController : MonoBehaviour {
 
 	public GunController gun;
 
-	public AudioClip jumpSound;
 	public AudioClip damageSound;
-	public AudioClip bulletSound;
 
 	// movement config
 	public float gravity = -25f;
@@ -20,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 	public float jumpHeight = 3f;
 	public int side = 0;
 
-	public int health;
+	public int health = 3;
 	
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -35,8 +33,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Start(){
-
-		health = 6;
 
 		this.ttAppendLoop ("MoveRoutine",delegate(ttHandler handler){
 
@@ -99,7 +95,6 @@ public class PlayerController : MonoBehaviour {
 		if( _controller.isGrounded && (Input.GetKeyDown( KeyCode.X ) || InputManager.Devices[0].Action1) )
 		{
 			_velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
-			SoundManager.Get.PlayClip (jumpSound, false);
 			//_animator.Play( Animator.StringToHash( "Jump" ) );s
 		}
 		
@@ -150,8 +145,6 @@ public class PlayerController : MonoBehaviour {
 				}
 				
 				gun.Shoot(new Vector3(hDirection, vDirection));
-
-				SoundManager.Get.PlayClip (bulletSound, false);
 				
 				loop.WaitFor(0.1f);
 			}
@@ -185,13 +178,11 @@ public class PlayerController : MonoBehaviour {
 
 		EnemyBulletController enemyBullet = theOther.GetComponent<EnemyBulletController>();
 
-		//print ("3333");
+		print ("3333");
 
 		if (enemyBullet != null) {
 
 			health--;
-
-			//print ("HEALTH: " + health);
 
 			List<Image> player1Health = GameContext.Get.GUI.player1Health;
 
@@ -241,22 +232,20 @@ public class PlayerController : MonoBehaviour {
 		// wait a few seconds
 		// show gameover screen
 
-		//TODO: Tonno, como hago esta vara?
 		this.ttAppend ("DieRoutine", delegate(ttHandler handler){
+
+			SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+			if (spriteRenderer != null)
+			{
+				spriteRenderer.enabled = false;
+			}
+		}).ttAppend(1f).ttAppend(delegate(ttHandler handler){
+
 			GameContext.Get.GUI.ShowGameOver();	
-			gameObject.active = false;
+
 		});
 
 
-		/*this.ttAppend ("DieRoutine", delegate(ttHandler handler){
-			
-			gameObject.GetComponent<SpriteRenderer>().enabled = false;
-			
-		}).ttAppend(1f).ttAppend(delegate(ttHandler handler){
-			
-			GameContext.Get.GUI.ShowGameOver();	
-			
-		});*/
 
 	}
 	
