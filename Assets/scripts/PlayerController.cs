@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour {
 	public float jumpHeight = 3f;
 	public int side = 0;
 
-	public int health = 3;
+	public int health;
 	
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Start(){
+
+		health = 6;
 
 		this.ttAppendLoop ("MoveRoutine",delegate(ttHandler handler){
 
@@ -183,11 +185,13 @@ public class PlayerController : MonoBehaviour {
 
 		EnemyBulletController enemyBullet = theOther.GetComponent<EnemyBulletController>();
 
-		print ("3333");
+		//print ("3333");
 
 		if (enemyBullet != null) {
 
 			health--;
+
+			//print ("HEALTH: " + health);
 
 			List<Image> player1Health = GameContext.Get.GUI.player1Health;
 
@@ -237,17 +241,22 @@ public class PlayerController : MonoBehaviour {
 		// wait a few seconds
 		// show gameover screen
 
+		//TODO: Tonno, como hago esta vara?
 		this.ttAppend ("DieRoutine", delegate(ttHandler handler){
-
-			gameObject.GetComponent<SpriteRenderer>().enabled = false;
-
-		}).ttAppend(1f).ttAppend(delegate(ttHandler handler){
-
 			GameContext.Get.GUI.ShowGameOver();	
-
+			gameObject.active = false;
 		});
 
 
+		/*this.ttAppend ("DieRoutine", delegate(ttHandler handler){
+			
+			gameObject.GetComponent<SpriteRenderer>().enabled = false;
+			
+		}).ttAppend(1f).ttAppend(delegate(ttHandler handler){
+			
+			GameContext.Get.GUI.ShowGameOver();	
+			
+		});*/
 
 	}
 	
