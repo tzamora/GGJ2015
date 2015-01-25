@@ -28,7 +28,9 @@ public class EnemySpanerController : MonoBehaviour {
 
 		GameObject ravenGO = (GameObject) GameObject.Instantiate (ravenEnemyPrefab.gameObject, rightSpawnPoint.position, Quaternion.identity);
 
-		ravenGO.GetComponent<GhostEnemyController> ().OnDie += delegate() {
+		//ravenGO.transform.localScale = new Vector3 (-1f, 1f, 1f);
+
+		ravenGO.GetComponent<GhostEnemyController> ().OnDie += delegate() {	
 
 			GameObject raven2GO = (GameObject) GameObject.Instantiate (ravenEnemyPrefab.gameObject, leftSpawnPoint.position, Quaternion.identity);
 
@@ -47,7 +49,9 @@ public class EnemySpanerController : MonoBehaviour {
 
 					GameObject carriageGO2 = (GameObject) GameObject.Instantiate (enemyCarriagePrefab.gameObject, carriageSpawnLeftPoint.position, Quaternion.identity);
 
-					raven2GO.transform.localScale = new Vector3(-1f, 1f, 1f);
+					carriageGO2.transform.localScale = new Vector3(-1f, 1f, 1f);
+
+					carriageGO2.GetComponent<CarriageLeverController>().side = 1;
 
 				};
 

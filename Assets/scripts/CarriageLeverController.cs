@@ -32,6 +32,8 @@ public class CarriageLeverController : MonoBehaviour {
 
 	public Action OnDie;
 
+	public int side = -1;
+
 	// Use this for initialization
 	void Start () {
 
@@ -63,7 +65,7 @@ public class CarriageLeverController : MonoBehaviour {
 
 		this.ttAppend("AppearanceRoutine", 4f).ttAppendLoop (2f, delegate(ttHandler handler) {
 
-			transform.Translate(new Vector3 (-1f * 2f, 0f, 0f) * Time.deltaTime);
+			transform.Translate(new Vector3 (side * 2f, 0f, 0f) * Time.deltaTime);
 
 		});
 
