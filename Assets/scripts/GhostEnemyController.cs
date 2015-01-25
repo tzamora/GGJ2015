@@ -25,11 +25,11 @@ public class GhostEnemyController : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		//SeekAndDestroyRoutine ();
-
-		//ShootRoutine ();
-
-		//FadeTrailRoutine ();
+//		SeekAndDestroyRoutine ();
+//
+//		//ShootRoutine ();
+//
+//		FadeTrailRoutine ();
 
 		MoveRoutine ();
 
@@ -56,6 +56,16 @@ public class GhostEnemyController : MonoBehaviour {
 			Damage();
 			
 		}
+
+//		PlayerController player1 = other.GetComponent<PlayerController> ();
+//
+//		PlayerController2 player2 = other.GetComponent<PlayerController2> ();
+//
+//		if (player1 != null) {
+//		
+//			player1.
+//		
+//		}
 		
 	}
 	

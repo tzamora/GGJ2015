@@ -5,6 +5,8 @@ public class BulletController : MonoBehaviour {
 
 	public GameObject bulletExplosionPrefab;
 
+	public AudioClip impactSound;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -14,15 +16,17 @@ public class BulletController : MonoBehaviour {
 
 		PlayerController player1 = other.GetComponent<PlayerController> ();
 
-		//PlayerController2 player2 = other.GetComponent<PlayerController2> ();
+		PlayerController2 player2 = other.GetComponent<PlayerController2> ();
 
-		if (!(player1 /*|| player2*/)) {
+		if (!(player1 || player2)) {
 		
 			GameObject bulletExplosionGO = (GameObject)GameObject.Instantiate (bulletExplosionPrefab, transform.position, Quaternion.identity);
 			
 			float durationTime = bulletExplosionGO.GetComponent<ParticleSystem> ().duration;
 			
 			Destroy (bulletExplosionGO, durationTime);
+
+			//SoundManager.Get.PlayClip(impactSound, false);
 		
 		}
 
