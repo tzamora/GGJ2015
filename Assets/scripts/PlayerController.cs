@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour {
 
 	public GunController gun;
 
+	public AudioClip damageSound;
+
 	// movement config
 	public float gravity = -25f;
 	public float runSpeed = 8f;
@@ -222,6 +224,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Die(){
+
+		SoundManager.Get.PlayClip (damageSound, false);
 
 		// first show a die animation
 		// then disapear

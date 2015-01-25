@@ -11,6 +11,8 @@ public class GameContext : MonoSingleton<GameContext> {
 
 	public GUIController GUI;
 
+	public SoundManager soundManager;
+
 	// Use this for initialization
 	void Awake () {
 	
