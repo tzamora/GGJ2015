@@ -14,9 +14,9 @@ public class BulletController : MonoBehaviour {
 
 		PlayerController player1 = other.GetComponent<PlayerController> ();
 
-		//PlayerController2 player2 = other.GetComponent<PlayerController2> ();
+		PlayerController2 player2 = other.GetComponent<PlayerController2> ();
 
-		if (!(player1 /*|| player2*/)) {
+		if (!(player1 || player2)) {
 		
 			GameObject bulletExplosionGO = (GameObject)GameObject.Instantiate (bulletExplosionPrefab, transform.position, Quaternion.identity);
 			

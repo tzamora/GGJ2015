@@ -104,7 +104,7 @@ public class CarriageLeverController : MonoBehaviour {
 
 			if(LeftTrigger.onEnter){
 				
-				if(Input.GetKeyDown(KeyCode.A) || InputManager.Devices[0].Action2.WasPressed){
+				if(Input.GetKeyDown(KeyCode.A) || InputManager.Devices[0].Action2.WasPressed || InputManager.Devices[1].Action2.WasPressed){
 
 					leverPushCounter++;
 
@@ -132,11 +132,9 @@ public class CarriageLeverController : MonoBehaviour {
 				
 			}
 
-
-
 			if(RightTrigger.onEnter){
 
-				if(Input.GetKeyDown(KeyCode.A) || InputManager.Devices[0].Action2.WasPressed ){
+				if(Input.GetKeyDown(KeyCode.A) || InputManager.Devices[0].Action2.WasPressed || InputManager.Devices[1].Action2.WasPressed ){
 
 					leverPushCounter++;
 
@@ -284,7 +282,7 @@ public class CarriageLeverController : MonoBehaviour {
 
 			for (int i = 0; i < wheels.Length; i++) {
 
-				wheels[i].Rotate(new Vector3(0f,0f,-t*15));
+				wheels[i].Rotate(new Vector3(0f,0f,-t*25));
 
 			}
 

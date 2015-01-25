@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using InControl;
 
 public class EnemySpanerController : MonoBehaviour {
 
@@ -20,7 +21,15 @@ public class EnemySpanerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		SpawnRavenRoutine ();
+		this.ttAppendLoop (delegate(ttHandler handler){
+
+			if (InputManager.Devices[0].LeftBumper.WasPressed) {
+				
+				SpawnRavenRoutine ();
+				
+			}
+
+		});
 
 	}
 
@@ -36,7 +45,7 @@ public class EnemySpanerController : MonoBehaviour {
 
 			raven2GO.GetComponent<GhostEnemyController>().side = 1;
 
-			raven2GO.transform.localScale = new Vector3(-1f, 1f, 1f);
+			raven2GO.transform.localScale = new Vector3(-0.65f, 0.65f, 1f);
 
 			raven2GO.GetComponent<GhostEnemyController>().OnDie += delegate() {
 
@@ -49,7 +58,7 @@ public class EnemySpanerController : MonoBehaviour {
 
 					GameObject carriageGO2 = (GameObject) GameObject.Instantiate (enemyCarriagePrefab.gameObject, carriageSpawnLeftPoint.position, Quaternion.identity);
 
-					carriageGO2.transform.localScale = new Vector3(-1f, 1f, 1f);
+					carriageGO2.transform.localScale = new Vector3(-0.65f, 0.65f, 1f);
 
 					carriageGO2.GetComponent<CarriageLeverController>().side = 1;
 

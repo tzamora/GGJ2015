@@ -4,17 +4,13 @@ using InControl;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController2 : MonoBehaviour {
 
 	public GunController gun;
 
 	public AudioClip damageSound;
 
 	public Animator animator;
-
-	public Material damageMaterial;
-	
-	public Material normalMaterial;
 
 	// movement config
 	public float gravity = -25f;
@@ -23,6 +19,10 @@ public class PlayerController : MonoBehaviour {
 	public float inAirDamping = 5f;
 	public float jumpHeight = 3f;
 	public int side = 1;
+
+	public Material damageMaterial;
+	
+	public Material normalMaterial;
 
 	public int health;
 	
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour {
 		if( _controller.isGrounded )
 			_velocity.y = 0;
 
-		if( Input.GetKey( KeyCode.RightArrow ) || InputManager.Devices[0].LeftStick.Right)
+		if( Input.GetKey( KeyCode.RightArrow ) || InputManager.Devices[1].LeftStick.Right)
 		{
 			side = 1;
 
@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour {
 			}
 				
 		}
-		else if( Input.GetKey( KeyCode.LeftArrow ) || InputManager.Devices[0].LeftStick.Left)
+		else if( Input.GetKey( KeyCode.LeftArrow ) || InputManager.Devices[1].LeftStick.Left)
 		{
 			side = -1;
 
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour {
 		
 		
 		// we can only jump whilst grounded
-		if( _controller.isGrounded && (Input.GetKeyDown( KeyCode.X ) || InputManager.Devices[0].Action1) )
+		if( _controller.isGrounded && (Input.GetKeyDown( KeyCode.X ) || InputManager.Devices[1].Action1) )
 		{
 			_velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
 			animator.Play( Animator.StringToHash( "animation_jump" ) );
@@ -126,14 +126,14 @@ public class PlayerController : MonoBehaviour {
 
 		this.ttAppendLoop ("ShootRoutine",delegate(ttHandler loop){
 
-			if(InputManager.Devices[0].Action2.WasPressed){
-
+			if(InputManager.Devices[1].Action2.WasPressed){
+				
 				animator.Play( Animator.StringToHash( "animation_lever" ) );
-
+				
 			}
 
 			// listen the shoot action
-			if( InputManager.Devices[0].Action3 || Input.GetKey(KeyCode.Z))
+			if( InputManager.Devices[1].Action3 || Input.GetKey(KeyCode.Z))
 			{
 //				int vDirection = 0;
 //				
@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour {
 				gun.Shoot(new Vector3(side, 0f));
 
 				SoundManager.Get.PlayClip(shootSound, false);
-				
+
 				loop.WaitFor(0.3f);
 			}
 			
@@ -201,20 +201,20 @@ public class PlayerController : MonoBehaviour {
 		EnemyBulletController enemyBullet = theOther.GetComponent<EnemyBulletController>();
 
 		GhostEnemyController raven = theOther.GetComponent<GhostEnemyController>();
-
+		
 		if (enemyBullet != null || raven != null) {
 
 			health--;
 
 			DamageBlinkRoutine();
 
-			List<Image> player1Health = GameContext.Get.GUI.player1Health;
+			List<Image> player2Health = GameContext.Get.GUI.player2Health;
 
-			if(player1Health.Count > 0){
+			if(player2Health.Count > 0){
 
-				Destroy(player1Health[player1Health.Count-1].gameObject);
+				Destroy(player2Health[player2Health.Count-1].gameObject);
 
-				player1Health.RemoveAt(player1Health.Count-1);
+				player2Health.RemoveAt(player2Health.Count-1);
 
 			}
 
@@ -235,7 +235,8 @@ public class PlayerController : MonoBehaviour {
 	{
 		SpriteRenderer[] spriteRenders = gameObject.GetComponentsInChildren<SpriteRenderer> ();
 		
-		this.ttAppend ("damageBlinkRoutine", delegate() {
+		this
+			.ttAppend ("damageBlinkRoutine", delegate() {
 				
 				for (int i = 0; i < spriteRenders.Length; i++) {
 					

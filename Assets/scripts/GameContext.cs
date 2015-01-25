@@ -3,6 +3,8 @@ using System.Collections;
 
 public class GameContext : MonoSingleton<GameContext> {
 
+	public AudioClip gameSound;
+
 	public PlayerController player;
 
 	public CarriageLeverController playerCarriage;
@@ -18,6 +20,8 @@ public class GameContext : MonoSingleton<GameContext> {
 	// Use this for initialization
 	void Awake () {
 	
+		SoundManager.Get.PlayClip (gameSound, true);
+
 	}
 
 }
