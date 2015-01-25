@@ -1,0 +1,113 @@
+fileFormatVersion: 2
+guid: 140dadfdad5d73346817a5ba5ef40e79
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Player_1_head
+    21300002: Player_1_hand_right
+    21300004: Player_1_hand_left
+    21300006: Player_1_leg_right
+    21300008: Player_1_leg_left
+    21300010: Player_1_torso
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Player_1_head
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 171
+        width: 115
+        height: 128
+      alignment: 9
+      pivot: {x: .514713526, y: .0813945532}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player_1_hand_right
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 189
+        width: 25
+        height: 62
+      alignment: 9
+      pivot: {x: .590243518, y: .872978449}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player_1_hand_left
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 118
+        width: 25
+        height: 62
+      alignment: 9
+      pivot: {x: .635363758, y: .882075429}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player_1_leg_right
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 36
+        width: 48
+        height: 65
+      alignment: 9
+      pivot: {x: .323745161, y: .90782696}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player_1_leg_left
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 38
+        width: 44
+        height: 63
+      alignment: 9
+      pivot: {x: .320541024, y: .911821246}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Player_1_torso
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 75
+        width: 66
+        height: 109
+      alignment: 9
+      pivot: {x: .405997306, y: .137788057}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
