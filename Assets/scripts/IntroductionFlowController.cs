@@ -35,7 +35,8 @@ public class IntroductionFlowController : MonoBehaviour {
 
 	void IntroRoutine(){
 
-		this.ttAppend (2f).ttAppendLoop (2f, delegate(ttHandler handler) {
+		this.ttAppend (1f).ttAppendLoop (2f, delegate(ttHandler handler) {
+		//this.ttAppendLoop (2f, delegate(ttHandler handler) {
 			
 			Camera.main.backgroundColor = Color.Lerp (Color.white, Color.black, handler.t);
 			
@@ -70,7 +71,7 @@ public class IntroductionFlowController : MonoBehaviour {
 		})
 
 
-		.ttAppend (2f, delegate() {
+		.ttAppend (1f, delegate() {
 					photos [0].SetActive (false);
 					photos [1].SetActive (false);
 					photos [2].SetActive (false);
@@ -81,9 +82,9 @@ public class IntroductionFlowController : MonoBehaviour {
 					photos [6].SetActive (true);
 					photos [7].SetActive (true);
 		})
-			
 
-		.ttAppend(4f).ttAppend(delegate(ttHandler handler){
+
+		.ttAppend(2f).ttAppend(delegate(ttHandler handler){
 			
 			photos[4].SetActive(false);
 			photos[5].SetActive(false);
