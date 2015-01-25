@@ -49,14 +49,18 @@ public class EnemyController : MonoBehaviour {
 	void ShootRoutine(){
 
 		if (autoShoot) {
-		
-			this.ttAppendLoop ("ShootRoutine", delegate(ttHandler handler) {
+
+				this.ttAppendLoop ("ShootRoutine", delegate(ttHandler handler) {
+					
+					if(weapon.transform.GetBounds().IsVisibleFrom(Camera.main)) {
+
+						weapon.Shoot (new Vector3 (side, 0f));
+						
+						handler.WaitFor (0.6f);
 				
-				weapon.Shoot (new Vector3 (side, 0f));
-				
-				handler.WaitFor (0.6f);
-				
-			});
+					}
+					
+				});
 
 		}
 
