@@ -54,7 +54,7 @@ public class EnemyController : MonoBehaviour {
 				
 				weapon.Shoot (new Vector3 (side, 0f));
 				
-				handler.WaitFor (0.3f);
+				handler.WaitFor (0.6f);
 				
 			});
 

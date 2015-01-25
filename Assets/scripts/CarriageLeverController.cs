@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using InControl;
 
 public class CarriageLeverController : MonoBehaviour {
 
@@ -84,7 +85,7 @@ public class CarriageLeverController : MonoBehaviour {
 
 			if(LeftTrigger.onEnter){
 				
-				if(Input.GetKeyDown(KeyCode.A)){
+				if(Input.GetKeyDown(KeyCode.A) || InputManager.Devices[0].Action2.WasPressed){
 
 				leverPushCounter++;
 
@@ -144,31 +145,34 @@ public class CarriageLeverController : MonoBehaviour {
 		this.ttAppendLoop ("EnemyMoveLeverRoutine", delegate(ttHandler handler){
 			
 			if(RightTrigger.onEnter){
-				
-				EnemyController enemy = RightTrigger.other.GetComponent<EnemyController>();
-				
-				if(enemy != null){
+
+				if(RightTrigger.other!=null){
+
+					EnemyController enemy = RightTrigger.other.GetComponent<EnemyController>();
 					
-					leverPushCounter++;
-					
-					leverPushCounter = Mathf.Clamp(leverPushCounter, 0, 15);
-					
-					if(leverIsLeft){
+					if(enemy != null){
 						
-						leverPivot.rotation = Quaternion.Euler(new Vector3(0f, 0f, -20f));
+						leverPushCounter++;
 						
-						leverIsLeft = false;
+						leverPushCounter = Mathf.Clamp(leverPushCounter, 0, 15);
 						
-					}else{
-						
-						leverPivot.rotation = Quaternion.Euler(new Vector3(0f, 0f, 20f));
-						
-						leverIsLeft = true;
+						if(leverIsLeft){
+							
+							leverPivot.rotation = Quaternion.Euler(new Vector3(0f, 0f, -20f));
+							
+							leverIsLeft = false;
+							
+						}else{
+							
+							leverPivot.rotation = Quaternion.Euler(new Vector3(0f, 0f, 20f));
+							
+							leverIsLeft = true;
+							
+						}
 						
 					}
-					
+
 				}
-				
 			}
 
 			handler.WaitFor(0.5f);

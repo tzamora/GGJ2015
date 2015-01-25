@@ -50,9 +50,9 @@ public class GhostEnemyController : MonoBehaviour {
 	{
 		this.ttAppendLoop ("SeekAndDestroyRoutine", delegate(ttHandler loop){
 
-			// get the player position
-			Vector2 targetPosition = GameContext.Get.player.transform.position;
+			var player = GameContext.Get.player;
 
+			Vector2 targetPosition = player.transform.position;
 			transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 1);
 
 		});

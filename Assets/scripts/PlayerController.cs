@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using InControl;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
 
@@ -13,6 +15,8 @@ public class PlayerController : MonoBehaviour {
 	public float inAirDamping = 5f;
 	public float jumpHeight = 3f;
 	public int side = 0;
+
+	public int health = 3;
 	
 	[HideInInspector]
 	private float normalizedHorizontalSpeed = 0;
@@ -34,11 +38,7 @@ public class PlayerController : MonoBehaviour {
 
 		});
 
-		this.ttAppendLoop ("HandleInputRoutine", delegate(ttHandler handler){
-			
-			HandleInput ();
-			
-		});
+		HandleInput ();
 
 	}
 
@@ -51,8 +51,8 @@ public class PlayerController : MonoBehaviour {
 		
 		if( _controller.isGrounded )
 			_velocity.y = 0;
-		
-		if( Input.GetKey( KeyCode.RightArrow ) )
+
+		if( Input.GetKey( KeyCode.RightArrow ) || InputManager.Devices[0].LeftStick.Right)
 		{
 			side = 1;
 
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour {
 			}
 				
 		}
-		else if( Input.GetKey( KeyCode.LeftArrow ) )
+		else if( Input.GetKey( KeyCode.LeftArrow ) || InputManager.Devices[0].LeftStick.Left)
 		{
 			side = -1;
 
@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour {
 		
 		
 		// we can only jump whilst grounded
-		if( _controller.isGrounded && Input.GetKeyDown( KeyCode.X ) )
+		if( _controller.isGrounded && (Input.GetKeyDown( KeyCode.X ) || InputManager.Devices[0].Action1) )
 		{
 			_velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
 			//_animator.Play( Animator.StringToHash( "Jump" ) );s
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour {
 		this.ttAppendLoop ("ShootRoutine",delegate(ttHandler loop){
 			
 			// listen the shoot action
-			if( InputManager.ActiveDevice.Action3 || Input.GetKey(KeyCode.Z))
+			if( InputManager.Devices[0].Action3 || Input.GetKey(KeyCode.Z))
 			{
 				int vDirection = 0;
 				
@@ -153,41 +153,70 @@ public class PlayerController : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D theOther) {
 
-		if (theOther.transform == null) {
+		if (theOther.transform.parent != null) {
 		
-			return;
-		
+			RailController rail = theOther.transform.parent.GetComponent<RailController> ();
+			
+			if (rail!=null) {
+				
+				transform.parent = rail.transform;
+				
+			}
+
 		}
 
-		RailController rail = theOther.transform.parent.GetComponent<RailController> ();
-
-
-
-		if (rail!=null) {
-		
-			transform.parent = rail.transform;
-		
-		}
 
 		DieTriggerController dieTrigger = theOther.GetComponent<DieTriggerController>();
 
-		if (dieTrigger) {
+		if (dieTrigger!=null) {
 
 			Die();
 
+		}
+
+		EnemyBulletController enemyBullet = theOther.GetComponent<EnemyBulletController>();
+
+		print ("3333");
+
+		if (enemyBullet != null) {
+
+			health--;
+
+			List<Image> player1Health = GameContext.Get.GUI.player1Health;
+
+			if(player1Health.Count > 0){
+
+				Destroy(player1Health[player1Health.Count-1].gameObject);
+
+				player1Health.RemoveAt(player1Health.Count-1);
+
+			}
+
+			Destroy (enemyBullet.gameObject);
+
+			if(health <= 0){
+
+				Die ();
+
+			}
+		
 		}
 
 
 	}
 
 	void OnTriggerExit2D(Collider2D theOther) {
+
+		if (theOther.transform.parent != null) {
 		
-		RailController rail = theOther.transform.parent.GetComponent<RailController> ();
+			RailController rail = theOther.transform.parent.GetComponent<RailController> ();
+			
+			if (rail!=null) {
+				
+				transform.parent = null;
+				
+			}
 		
-		if (rail!=null) {
-			
-			transform.parent = null;
-			
 		}
 		
 	}
