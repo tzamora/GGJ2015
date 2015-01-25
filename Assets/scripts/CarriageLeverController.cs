@@ -15,6 +15,8 @@ public class CarriageLeverController : MonoBehaviour {
 
 	public int maxCounter = 15;
 
+	public Transform[] wheels;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -126,6 +128,12 @@ public class CarriageLeverController : MonoBehaviour {
 		this.ttAppendLoop ("SetBackgroundSpeedRoutine", delegate(ttHandler handler) {
 		
 			float t = Mathf.InverseLerp(0, 15, leverPushCounter);
+
+			for (int i = 0; i < wheels.Length; i++) {
+
+				wheels[i].Rotate(new Vector3(0f,0f,-t*15));
+
+			}
 
 			GameContext.Get.background.ScrollingSpeed = -Mathf.Lerp(0f, 10f, t);
 		

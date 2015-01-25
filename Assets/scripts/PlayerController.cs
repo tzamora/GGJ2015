@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using InControl;
 
 public class PlayerController : MonoBehaviour {
 
@@ -89,7 +90,7 @@ public class PlayerController : MonoBehaviour {
 		
 		
 		// we can only jump whilst grounded
-		if( _controller.isGrounded && Input.GetKeyDown( KeyCode.UpArrow ) )
+		if( _controller.isGrounded && Input.GetKeyDown( KeyCode.X ) )
 		{
 			_velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
 			//_animator.Play( Animator.StringToHash( "Jump" ) );s
@@ -107,11 +108,47 @@ public class PlayerController : MonoBehaviour {
 
 	void HandleInput(){
 
-		if (Input.GetKey (KeyCode.Space)) {
-		
-			gun.Shoot( new Vector3(side, 0f, 0f ) );
-		
-		}
+		this.ttAppendLoop ("ShootRoutine",delegate(ttHandler loop){
+			
+			// listen the shoot action
+			if( InputManager.ActiveDevice.Action3 || Input.GetKey(KeyCode.Z))
+			{
+				int vDirection = 0;
+				
+				if(InputManager.ActiveDevice.Direction.Up || Input.GetKey(KeyCode.UpArrow)){
+					
+					vDirection = 1;
+					
+				}else if(InputManager.ActiveDevice.Direction.Down || Input.GetKey(KeyCode.DownArrow)){
+					
+					vDirection = -1;
+					
+				}
+				
+				int hDirection = 0;
+				
+				if(InputManager.ActiveDevice.Direction.Left || Input.GetKey(KeyCode.LeftArrow)){
+					
+					hDirection = -1;
+					
+				}else if(InputManager.ActiveDevice.Direction.Right || Input.GetKey(KeyCode.RightArrow)){
+					
+					hDirection = 1;
+					
+				}
+				
+				if(hDirection == 0 && vDirection == 0)
+				{
+					hDirection = side;
+				}
+				
+				gun.Shoot(new Vector3(hDirection, vDirection));
+				
+				loop.WaitFor(0.1f);
+			}
+			
+		});
+
 	}
 
 	void OnTriggerEnter2D(Collider2D theOther) {
@@ -160,7 +197,7 @@ public class PlayerController : MonoBehaviour {
 
 		}).ttAppend(1f).ttAppend(delegate(ttHandler handler){
 
-			GameContext.Get.GUI.ShowGameOver();
+			GameContext.Get.GUI.ShowGameOver();	
 
 		});
 
