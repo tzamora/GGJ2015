@@ -8,7 +8,9 @@ public class PlayerController : MonoBehaviour {
 
 	public GunController gun;
 
+	public AudioClip jumpSound;
 	public AudioClip damageSound;
+	public AudioClip bulletSound;
 
 	// movement config
 	public float gravity = -25f;
@@ -95,6 +97,7 @@ public class PlayerController : MonoBehaviour {
 		if( _controller.isGrounded && (Input.GetKeyDown( KeyCode.X ) || InputManager.Devices[0].Action1) )
 		{
 			_velocity.y = Mathf.Sqrt( 2f * jumpHeight * -gravity );
+			SoundManager.Get.PlayClip (jumpSound, false);
 			//_animator.Play( Animator.StringToHash( "Jump" ) );s
 		}
 		
@@ -145,6 +148,8 @@ public class PlayerController : MonoBehaviour {
 				}
 				
 				gun.Shoot(new Vector3(hDirection, vDirection));
+
+				SoundManager.Get.PlayClip (bulletSound, false);
 				
 				loop.WaitFor(0.1f);
 			}

@@ -8,6 +8,10 @@ public class CarriageLeverController : MonoBehaviour {
 
 	public TriggerController RightTrigger;
 
+	public AudioClip LeftTriggerSound;
+
+	public AudioClip RightTriggerSound;
+
 	public Transform leverPivot;
 
 	public bool leverIsLeft = false;
@@ -87,17 +91,23 @@ public class CarriageLeverController : MonoBehaviour {
 				
 				if(Input.GetKeyDown(KeyCode.A) || InputManager.Devices[0].Action2.WasPressed){
 
-				leverPushCounter++;
+					leverPushCounter++;
+
+
 
 					leverPushCounter = Mathf.Clamp(leverPushCounter, 0, 15);
 					
 					if(leverIsLeft){
+
+						SoundManager.Get.PlayClip (LeftTriggerSound, false);
 						
 						leverPivot.rotation = Quaternion.Euler(new Vector3(0f, 0f, -20f));
 						
 						leverIsLeft = false;
 						
 					}else{
+
+						SoundManager.Get.PlayClip (RightTriggerSound, false);
 						
 						leverPivot.rotation = Quaternion.Euler(new Vector3(0f, 0f, 20f));
 						
@@ -118,12 +128,16 @@ public class CarriageLeverController : MonoBehaviour {
 					leverPushCounter = Mathf.Clamp(leverPushCounter, 0, 15);
 					
 					if(leverIsLeft){
+
+						SoundManager.Get.PlayClip (LeftTriggerSound, false);
 						
 						leverPivot.rotation = Quaternion.Euler(new Vector3(0f, 0f, -20f));
 						
 						leverIsLeft = false;
 						
 					}else{
+
+						SoundManager.Get.PlayClip (RightTriggerSound, false);
 						
 						leverPivot.rotation = Quaternion.Euler(new Vector3(0f, 0f, 20f));
 						
