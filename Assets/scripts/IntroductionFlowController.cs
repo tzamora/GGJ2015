@@ -14,6 +14,8 @@ public class IntroductionFlowController : MonoBehaviour {
 
 	public GameObject[] photos;
 
+	//public Image introScreen;
+
 	public GameObject gameIntro;
 
 	public Button startButton;
@@ -35,8 +37,7 @@ public class IntroductionFlowController : MonoBehaviour {
 
 	void IntroRoutine(){
 
-		this.ttAppend (1f).ttAppendLoop (2f, delegate(ttHandler handler) {
-		//this.ttAppendLoop (2f, delegate(ttHandler handler) {
+		this.ttAppendLoop (0.5f, delegate(ttHandler handler) {
 			
 			Camera.main.backgroundColor = Color.Lerp (Color.white, Color.black, handler.t);
 			
@@ -72,15 +73,15 @@ public class IntroductionFlowController : MonoBehaviour {
 
 
 		.ttAppend (1f, delegate() {
-					photos [0].SetActive (false);
-					photos [1].SetActive (false);
-					photos [2].SetActive (false);
-					photos [3].SetActive (false);
+			photos [0].SetActive (false);
+			photos [1].SetActive (false);
+			photos [2].SetActive (false);
+			photos [3].SetActive (false);
 
-					photos [4].SetActive (true);
-					photos [5].SetActive (true);
-					photos [6].SetActive (true);
-					photos [7].SetActive (true);
+			photos [4].SetActive (true);
+			photos [5].SetActive (true);
+			photos [6].SetActive (true);
+			photos [7].SetActive (true);
 		})
 
 
@@ -93,8 +94,10 @@ public class IntroductionFlowController : MonoBehaviour {
 			
 			jamText.gameObject.SetActive(false);
 			
-			Camera.main.backgroundColor = Color.white;
+			Camera.main.backgroundColor = Color.black;
 			
+					photos[8].SetActive(true);
+
 			gameIntro.SetActive(true);
 			
 			SoundManager.Get.PlayClip(menuSound, true);
