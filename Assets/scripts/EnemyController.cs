@@ -113,11 +113,7 @@ public class EnemyController : MonoBehaviour {
 
 		BulletController bullet = other.GetComponent<BulletController> ();
 
-		print ("aca si");
-
 		if (bullet != null) {
-
-			print ("aca no");
 
 			Destroy(bullet.gameObject);
 

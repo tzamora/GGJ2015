@@ -36,7 +36,7 @@ public class CarriageLeverController : MonoBehaviour {
 		
 			AppearanceRoutine ();
 
-			ExplodeWhenEmptyRoutine ();
+			StartCoroutine( ExplodeWhenEmptyRoutine ());
 
 		}
 	
@@ -219,51 +219,45 @@ public class CarriageLeverController : MonoBehaviour {
 
 	}
 
-	void ExplodeWhenEmptyRoutine (){
+	IEnumerator ExplodeWhenEmptyRoutine (){
 
-
-//		for (int i = 0; i < enemiesInCarriage.Count; i++) {
-//		
-//			enemiesInCarriage[i].OnDie += delegate() {
-//			
-//				enemiesInCarriage.Remove(enemiesInCarriage[i]);
-//
-//			};
-//
-//		}
-
-		this.ttAppendLoop ("ExplodeWhenEmptyRoutine", delegate(ttHandler handler){
-
-			if(enemiesInCarriage.Count <= 0){
-
-				print ("asdadsadsdsdd0000");
-
-				ExplodeCarriageRoutine ();
-
-				handler.Break();
-
-			}
-
-		});
-
-	}
-
-	void ExplodeCarriageRoutine(){
-
-		print ("la concha!!");
-
-		for (int i = 0; i < explosions.Length; i++) {
-		
-			ParticleSystem pSystem = explosions[i].GetComponent<ParticleSystem>();
-
-			pSystem.Play();
-
-			Destroy (pSystem.gameObject, pSystem.duration);
-		
+		for (int i = 0; i < enemiesInCarriage.Count; i++) {
+			
+			enemiesInCarriage[i].OnDie += delegate() {
+				
+				print ("SE MURIO");
+				
+				enemiesInCarriage.RemoveAt(enemiesInCarriage.Count - 1);
+				
+			};
+			
 		}
 
-		//Destroy (this.gameObject);
-	
+		while (true) {
+
+			yield return true;
+			
+			if(enemiesInCarriage.Count <= 0){
+				
+				for (int i = 0; i < explosions.Length; i++) {
+					
+					ParticleSystem pSystem = explosions[i].GetComponent<ParticleSystem>();
+					
+					pSystem.Play();
+					
+					Destroy (pSystem.gameObject, pSystem.duration);
+					
+					yield return new WaitForSeconds(0.4f);
+					
+				}
+
+				break;
+
+			}
+		}
+
+		Destroy (this.gameObject);
+
 	}
 
 	void SetBackgroundSpeedRoutine (){
