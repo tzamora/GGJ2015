@@ -17,8 +17,16 @@ public class CarriageLeverController : MonoBehaviour {
 
 	public Transform[] wheels;
 
+	public bool enemyCarriage = false;
+
 	// Use this for initialization
 	void Start () {
+
+		if (enemyCarriage) {
+		
+			AppearanceRoutine ();
+
+		}
 	
 		PushLeverRoutine ();
 
@@ -30,7 +38,19 @@ public class CarriageLeverController : MonoBehaviour {
 
 		SetBackgroundSpeedRoutine ();
 
-		MovePlayerRoutine ();
+		MoveWheelsRoutine ();
+
+	}
+
+	void AppearanceRoutine (){
+
+		// 
+
+		this.ttAppend("AppearanceRoutine", 4f).ttAppendLoop (2f, delegate(ttHandler handler) {
+
+			transform.Translate(new Vector3 (-1f * 2f, 0f, 0f) * Time.deltaTime);
+
+		});
 
 	}
 
@@ -41,12 +61,6 @@ public class CarriageLeverController : MonoBehaviour {
 			GameContext.Get.GUI.counterText.text = leverPushCounter+"";
 
 		});
-
-	}
-
-	void MovePlayerRoutine(){
-
-
 
 	}
 
@@ -162,6 +176,22 @@ public class CarriageLeverController : MonoBehaviour {
 			
 		});
 		
+	}
+
+	void MoveWheelsRoutine(){
+
+		this.ttAppendLoop ("MoveWheelsRoutine", delegate(ttHandler handler) {
+				
+			float t = Mathf.InverseLerp(0, 15, GameContext.Get.playerCarriage.leverPushCounter);
+			
+			for (int i = 0; i < wheels.Length; i++) {
+				
+				wheels[i].Rotate(new Vector3(0f,0f,-t*15));
+				
+			}	
+		
+		});
+
 	}
 
 	void SetBackgroundSpeedRoutine (){
