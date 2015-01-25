@@ -22,6 +22,8 @@ public class CarriageLeverController : MonoBehaviour {
 	
 		PushLeverRoutine ();
 
+		EnemyMoveLeverRoutine ();
+
 		SetGUICounterRoutine ();
 
 		ReduceCounterRoutine ();
@@ -93,7 +95,7 @@ public class CarriageLeverController : MonoBehaviour {
 			}
 
 			if(RightTrigger.onEnter){
-				
+
 				if(Input.GetKeyDown(KeyCode.A)){
 
 					leverPushCounter++;
@@ -121,6 +123,45 @@ public class CarriageLeverController : MonoBehaviour {
 
 		});
 
+	}
+
+	void EnemyMoveLeverRoutine(){
+		
+		this.ttAppendLoop ("EnemyMoveLeverRoutine", delegate(ttHandler handler){
+			
+			if(RightTrigger.onEnter){
+				
+				EnemyController enemy = RightTrigger.other.GetComponent<EnemyController>();
+				
+				if(enemy != null){
+					
+					leverPushCounter++;
+					
+					leverPushCounter = Mathf.Clamp(leverPushCounter, 0, 15);
+					
+					if(leverIsLeft){
+						
+						leverPivot.rotation = Quaternion.Euler(new Vector3(0f, 0f, -20f));
+						
+						leverIsLeft = false;
+						
+					}else{
+						
+						leverPivot.rotation = Quaternion.Euler(new Vector3(0f, 0f, 20f));
+						
+						leverIsLeft = true;
+						
+					}
+					
+				}
+				
+			}
+
+			handler.WaitFor(0.5f);
+			
+			
+		});
+		
 	}
 
 	void SetBackgroundSpeedRoutine (){

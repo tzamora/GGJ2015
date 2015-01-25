@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour {
 					
 				}
 				
-				int hDirection = 0;
+				int hDirection = 1;
 				
 				if(InputManager.ActiveDevice.Direction.Left || Input.GetKey(KeyCode.LeftArrow)){
 					
@@ -153,7 +153,15 @@ public class PlayerController : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D theOther) {
 
+		if (theOther.transform == null) {
+		
+			return;
+		
+		}
+
 		RailController rail = theOther.transform.parent.GetComponent<RailController> ();
+
+
 
 		if (rail!=null) {
 		

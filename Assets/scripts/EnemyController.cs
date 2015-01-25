@@ -25,6 +25,8 @@ public class EnemyController : MonoBehaviour {
 
 	public Material normalMaterial;
 
+	public bool autoShoot = false;
+
 	
 	void Awake()
 	{
@@ -34,11 +36,29 @@ public class EnemyController : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		ShootRoutine ();
 
+		//MoveLever();
 
 		//MoveRoutine ();
 
 		//JumpRoutine ();
+
+	}
+
+	void ShootRoutine(){
+
+		if (autoShoot) {
+		
+			this.ttAppendLoop ("ShootRoutine", delegate(ttHandler handler) {
+				
+				weapon.Shoot (new Vector3 (side, 0f));
+				
+				handler.WaitFor (0.3f);
+				
+			});
+
+		}
 
 	}
 
@@ -108,7 +128,7 @@ public class EnemyController : MonoBehaviour {
 		SpriteRenderer[] spriteRenders = gameObject.GetComponentsInChildren<SpriteRenderer> ();
 
 		this
-		.ttAppend (delegate() {
+		.ttAppend ("damageBlinkRoutine", delegate() {
 
 			for (int i = 0; i < spriteRenders.Length; i++) {
 				

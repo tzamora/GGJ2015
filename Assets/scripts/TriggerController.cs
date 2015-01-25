@@ -9,7 +9,7 @@ public class TriggerController : MonoBehaviour {
 	public Collider2D other = null;
 
 	void OnTriggerEnter2D(Collider2D theOther) {
-
+		print ("TRIGGER PEGADO");
 		onEnter = true;
 		other = theOther;
 	}
