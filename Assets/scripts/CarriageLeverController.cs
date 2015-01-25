@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using InControl;
 
 public class CarriageLeverController : MonoBehaviour {
@@ -24,12 +25,18 @@ public class CarriageLeverController : MonoBehaviour {
 
 	public bool enemyCarriage = false;
 
+	public List<EnemyController> enemiesInCarriage;
+
+	public GameObject[] explosions;
+
 	// Use this for initialization
 	void Start () {
 
 		if (enemyCarriage) {
 		
 			AppearanceRoutine ();
+
+			ExplodeWhenEmptyRoutine ();
 
 		}
 	
@@ -93,8 +100,6 @@ public class CarriageLeverController : MonoBehaviour {
 
 					leverPushCounter++;
 
-
-
 					leverPushCounter = Mathf.Clamp(leverPushCounter, 0, 15);
 					
 					if(leverIsLeft){
@@ -119,9 +124,11 @@ public class CarriageLeverController : MonoBehaviour {
 				
 			}
 
+
+
 			if(RightTrigger.onEnter){
 
-				if(Input.GetKeyDown(KeyCode.A)){
+				if(Input.GetKeyDown(KeyCode.A) || InputManager.Devices[0].Action2.WasPressed ){
 
 					leverPushCounter++;
 
@@ -160,9 +167,9 @@ public class CarriageLeverController : MonoBehaviour {
 			
 			if(RightTrigger.onEnter){
 
-				if(RightTrigger.other!=null){
+				if(RightTrigger.others.Count > 0){
 
-					EnemyController enemy = RightTrigger.other.GetComponent<EnemyController>();
+					EnemyController enemy = RightTrigger.others[0].GetComponent<EnemyController>();
 					
 					if(enemy != null){
 						
@@ -210,6 +217,53 @@ public class CarriageLeverController : MonoBehaviour {
 		
 		});
 
+	}
+
+	void ExplodeWhenEmptyRoutine (){
+
+
+//		for (int i = 0; i < enemiesInCarriage.Count; i++) {
+//		
+//			enemiesInCarriage[i].OnDie += delegate() {
+//			
+//				enemiesInCarriage.Remove(enemiesInCarriage[i]);
+//
+//			};
+//
+//		}
+
+		this.ttAppendLoop ("ExplodeWhenEmptyRoutine", delegate(ttHandler handler){
+
+			if(enemiesInCarriage.Count <= 0){
+
+				print ("asdadsadsdsdd0000");
+
+				ExplodeCarriageRoutine ();
+
+				handler.Break();
+
+			}
+
+		});
+
+	}
+
+	void ExplodeCarriageRoutine(){
+
+		print ("la concha!!");
+
+		for (int i = 0; i < explosions.Length; i++) {
+		
+			ParticleSystem pSystem = explosions[i].GetComponent<ParticleSystem>();
+
+			pSystem.Play();
+
+			Destroy (pSystem.gameObject, pSystem.duration);
+		
+		}
+
+		//Destroy (this.gameObject);
+	
 	}
 
 	void SetBackgroundSpeedRoutine (){

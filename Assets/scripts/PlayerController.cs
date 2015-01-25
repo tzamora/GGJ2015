@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour {
 
 	public AudioClip damageSound;
 
-	public Animator animator;
+	public Animator animator; 
 
 	// movement config
 	public float gravity = -25f;
@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 	public float groundDamping = 20f; // how fast do we change direction? higher means faster
 	public float inAirDamping = 5f;
 	public float jumpHeight = 3f;
-	public int side = 0;
+	public int side = 1;
 
 	public int health = 3;
 	
@@ -55,6 +55,10 @@ public class PlayerController : MonoBehaviour {
 		
 		if( _controller.isGrounded )
 			_velocity.y = 0;
+
+		if (InputManager.Devices.Count <= 0) {
+			return;		
+		}
 
 		if( Input.GetKey( KeyCode.RightArrow ) || InputManager.Devices[0].LeftStick.Right)
 		{
@@ -113,40 +117,46 @@ public class PlayerController : MonoBehaviour {
 	void HandleInput(){
 
 		this.ttAppendLoop ("ShootRoutine",delegate(ttHandler loop){
-			
+
+			if (InputManager.Devices.Count <= 0) {
+				loop.Break();		
+			}
+
 			// listen the shoot action
 			if( InputManager.Devices[0].Action3 || Input.GetKey(KeyCode.Z))
 			{
 				int vDirection = 0;
 				
-				if(InputManager.ActiveDevice.Direction.Up || Input.GetKey(KeyCode.UpArrow)){
-					
-					vDirection = 1;
-					
-				}else if(InputManager.ActiveDevice.Direction.Down || Input.GetKey(KeyCode.DownArrow)){
-					
-					vDirection = -1;
-					
-				}
+//				if(InputManager.Devices[0].LeftStick.Up || Input.GetKey(KeyCode.UpArrow)){
+//					
+//					vDirection = 1;
+//					
+//				}else if(InputManager.Devices[0].LeftStick.Down || Input.GetKey(KeyCode.DownArrow)){
+//					
+//					vDirection = -1;
+//					
+//				}
+//				
+//				int hDirection = 1;
+//				
+//				if(InputManager.Devices[0].LeftStick.Left || Input.GetKey(KeyCode.LeftArrow)){
+//					
+//					hDirection = -1;
+//					
+//				}else if(InputManager.Devices[0].LeftStick.Right || Input.GetKey(KeyCode.RightArrow)){
+//					
+//					hDirection = 1;
+//					
+//				}
 				
-				int hDirection = 1;
+//				if(hDirection == 0 && vDirection == 0)
+//				{
+//					hDirection = side;
+//				}
+
+				//Debug.Log("-----> " + new Vector3(hDirection, vDirection));
 				
-				if(InputManager.ActiveDevice.Direction.Left || Input.GetKey(KeyCode.LeftArrow)){
-					
-					hDirection = -1;
-					
-				}else if(InputManager.ActiveDevice.Direction.Right || Input.GetKey(KeyCode.RightArrow)){
-					
-					hDirection = 1;
-					
-				}
-				
-				if(hDirection == 0 && vDirection == 0)
-				{
-					hDirection = side;
-				}
-				
-				gun.Shoot(new Vector3(hDirection, vDirection));
+				gun.Shoot(new Vector3(side, 0f));
 				
 				loop.WaitFor(0.1f);
 			}
@@ -179,6 +189,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		EnemyBulletController enemyBullet = theOther.GetComponent<EnemyBulletController>();
+
 		if (enemyBullet != null) {
 
 			health--;
@@ -233,12 +244,18 @@ public class PlayerController : MonoBehaviour {
 
 		this.ttAppend ("DieRoutine", delegate(ttHandler handler){
 
-			SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+			SpriteRenderer[] spriteRenderer = gameObject.GetComponentsInChildren<SpriteRenderer>();
 
-			if (spriteRenderer != null)
-			{
-				spriteRenderer.enabled = false;
+			for (int i = 0; i < spriteRenderer.Length; i++) {
+				spriteRenderer[i].enabled = false;
 			}
+//
+//			if (spriteRenderer != null)
+//			{
+//				spriteRenderer.enabled = false;
+//			}
+
+
 
 		}).ttAppend(1f).ttAppend(delegate(ttHandler handler){
 

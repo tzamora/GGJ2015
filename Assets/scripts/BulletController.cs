@@ -12,13 +12,19 @@ public class BulletController : MonoBehaviour {
 	
 	void OnTriggerEnter2D(Collider2D other) {
 
-		GameObject bulletExplosionGO = (GameObject)GameObject.Instantiate (bulletExplosionPrefab, transform.position, Quaternion.identity);
+		PlayerController player1 = other.GetComponent<PlayerController> ();
 
-		float durationTime = bulletExplosionGO.GetComponent<ParticleSystem> ().duration;
+		//PlayerController2 player2 = other.GetComponent<PlayerController2> ();
 
-		Destroy (bulletExplosionGO, durationTime);
-
-		Destroy (gameObject);
+		if (!(player1 /*|| player2*/)) {
+		
+			GameObject bulletExplosionGO = (GameObject)GameObject.Instantiate (bulletExplosionPrefab, transform.position, Quaternion.identity);
+			
+			float durationTime = bulletExplosionGO.GetComponent<ParticleSystem> ().duration;
+			
+			Destroy (bulletExplosionGO, durationTime);
+		
+		}
 
 	}
 }

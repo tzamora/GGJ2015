@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class EnemyController : MonoBehaviour {
 
@@ -10,6 +11,8 @@ public class EnemyController : MonoBehaviour {
 	public float inAirDamping = 5f;
 	public float jumpHeight = 3f;
 	public int side = 1; // -1 left, 1 right
+
+	public Action OnDie;
 
 	public float health = 4f;
 
@@ -27,6 +30,8 @@ public class EnemyController : MonoBehaviour {
 
 	public bool autoShoot = false;
 
+	public GameObject dieExplosion;
+
 	
 	void Awake()
 	{
@@ -36,7 +41,10 @@ public class EnemyController : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		ShootRoutine ();
+
+		ShootRoutine ();		
+
+
 
 		//MoveLever();
 
@@ -56,7 +64,7 @@ public class EnemyController : MonoBehaviour {
 
 						weapon.Shoot (new Vector3 (side, 0f));
 						
-						handler.WaitFor (0.6f);
+						handler.WaitFor (1f);
 				
 					}
 					
@@ -105,8 +113,14 @@ public class EnemyController : MonoBehaviour {
 
 		BulletController bullet = other.GetComponent<BulletController> ();
 
+		print ("aca si");
+
 		if (bullet != null) {
-		
+
+			print ("aca no");
+
+			Destroy(bullet.gameObject);
+
 			Damage();
 
 		}
@@ -200,6 +214,33 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void Die(){
+
+		GameObject explosion = (GameObject)GameObject.Instantiate (dieExplosion, transform.position, Quaternion.identity);
+
+		float duration = explosion.GetComponent<ParticleSystem>().duration;
+
+		//SoundManager.Get.PlayClip (damageSound, false);
+			
+		SpriteRenderer[] spriteRenderer = gameObject.GetComponentsInChildren<SpriteRenderer>();
+		
+		for (int i = 0; i < spriteRenderer.Length; i++) {
+			spriteRenderer[i].enabled = false;
+		}
+
+
+
+		if (OnDie!=null) {
+			OnDie ();		
+		}
+
+
+		Destroy (explosion, duration);
+
+		Destroy (gameObject);
+
+		weapon.enabled = false;
+
+		Destroy (weapon);
 
 		// play die animation
 

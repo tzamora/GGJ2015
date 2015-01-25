@@ -1,23 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TriggerController : MonoBehaviour {
 
 	public bool onEnter = false;
 	public bool onExit = false;
 
-	public Collider2D other = null;
+	public List<Collider2D> others = null;
 
 	void OnTriggerEnter2D(Collider2D theOther) {
-		//print ("TRIGGER PEGADO");
+		print ("TRIGGER PEGADO");
 		onEnter = true;
-		other = theOther;
+		others.Add(theOther);
 	}
 
 	void OnTriggerExit2D(Collider2D theOther) {
-		onEnter = false;
-		onExit = true;
-		other = null;
+		others.Remove (theOther);
+
+		if (others.Count <= 0) {
+		
+			onEnter = false;
+			onExit = true;
+		
+		}
 	}
 
 }
