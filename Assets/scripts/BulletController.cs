@@ -5,6 +5,8 @@ public class BulletController : MonoBehaviour {
 
 	public GameObject bulletExplosionPrefab;
 
+	public AudioClip impactSound;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -23,6 +25,8 @@ public class BulletController : MonoBehaviour {
 			float durationTime = bulletExplosionGO.GetComponent<ParticleSystem> ().duration;
 			
 			Destroy (bulletExplosionGO, durationTime);
+
+			//SoundManager.Get.PlayClip(impactSound, false);
 		
 		}
 

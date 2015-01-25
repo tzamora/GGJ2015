@@ -206,6 +206,8 @@ public class PlayerController : MonoBehaviour {
 
 			health--;
 
+			SoundManager.Get.PlayClip(damageSound, false);
+
 			DamageBlinkRoutine();
 
 			List<Image> player1Health = GameContext.Get.GUI.player1Health;
