@@ -12,6 +12,8 @@ public class EnemySpanerController : MonoBehaviour {
 
 	public Transform leftSpawnPoint;
 
+	public Transform leftTopSpawnPoint;
+
 	public Transform rightSpawnPoint;
 
 	public Transform carriageSpawnLeftPoint;
@@ -39,7 +41,21 @@ public class EnemySpanerController : MonoBehaviour {
 
 		//ravenGO.transform.localScale = new Vector3 (-1f, 1f, 1f);
 
-		ravenGO.GetComponent<GhostEnemyController> ().OnDie += delegate() {	
+		ravenGO.GetComponent<GhostEnemyController> ().OnDie += delegate() {
+
+
+
+
+			GameObject ravenAirGO = (GameObject) GameObject.Instantiate (ravenEnemyPrefab.gameObject, leftTopSpawnPoint.position, Quaternion.identity);
+			
+			ravenAirGO.GetComponent<GhostEnemyController>().side = 1;
+			
+			ravenAirGO.transform.localScale = new Vector3(-0.65f, 0.65f, 1f);
+
+
+
+
+			//////
 
 			GameObject raven2GO = (GameObject) GameObject.Instantiate (ravenEnemyPrefab.gameObject, leftSpawnPoint.position, Quaternion.identity);
 
