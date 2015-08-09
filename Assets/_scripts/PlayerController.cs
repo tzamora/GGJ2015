@@ -3,6 +3,7 @@ using System.Collections;
 using InControl;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using Prime31;
 
 public class PlayerController : MonoBehaviour {
 
