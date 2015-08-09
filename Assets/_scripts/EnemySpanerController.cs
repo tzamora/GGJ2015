@@ -25,7 +25,8 @@ public class EnemySpanerController : MonoBehaviour {
 
 		this.ttAppendLoop (delegate(ttHandler handler){
 
-			if (InputManager.Devices[0].LeftBumper.WasPressed) {
+			//if (InputManager.Devices[0].LeftBumper.WasPressed) {
+			if(handler.timeSinceStart > 4000){
 				
 				SpawnRavenRoutine ();
 				

@@ -103,8 +103,9 @@ public class CarriageLeverController : MonoBehaviour {
 		this.ttAppendLoop ("PumpLeverRoutine", delegate(ttHandler handler){
 
 			if(LeftTrigger.onEnter){
-				
-				if(Input.GetKeyDown(KeyCode.A) || InputManager.Devices[0].Action2.WasPressed || InputManager.Devices[1].Action2.WasPressed){
+
+				//|| InputManager.Devices[0].Action2.WasPressed || InputManager.Devices[1].Action2.WasPressed
+				if(Input.GetKeyDown(KeyCode.A)){
 
 					leverPushCounter++;
 
@@ -134,7 +135,8 @@ public class CarriageLeverController : MonoBehaviour {
 
 			if(RightTrigger.onEnter){
 
-				if(Input.GetKeyDown(KeyCode.A) || InputManager.Devices[0].Action2.WasPressed || InputManager.Devices[1].Action2.WasPressed ){
+				// || InputManager.Devices[0].Action2.WasPressed || InputManager.Devices[1].Action2.WasPressed
+				if(Input.GetKeyDown(KeyCode.A) ){
 
 					leverPushCounter++;
 
