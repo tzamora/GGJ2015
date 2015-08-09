@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Prime31;
 
 
 public class DemoScene : MonoBehaviour
@@ -19,6 +18,8 @@ public class DemoScene : MonoBehaviour
 	private Animator _animator;
 	private RaycastHit2D _lastControllerColliderHit;
 	private Vector3 _velocity;
+
+
 
 
 	void Awake()
@@ -63,6 +64,9 @@ public class DemoScene : MonoBehaviour
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
 	void Update()
 	{
+		// grab our current _velocity to use as a base for all calculations
+		_velocity = _controller.velocity;
+
 		if( _controller.isGrounded )
 			_velocity.y = 0;
 
@@ -101,25 +105,14 @@ public class DemoScene : MonoBehaviour
 		}
 
 
-		// apply horizontal speed smoothing it. dont really do this with Lerp. Use SmoothDamp or something that provides more control
+		// apply horizontal speed smoothing it
 		var smoothedMovementFactor = _controller.isGrounded ? groundDamping : inAirDamping; // how fast do we change direction?
 		_velocity.x = Mathf.Lerp( _velocity.x, normalizedHorizontalSpeed * runSpeed, Time.deltaTime * smoothedMovementFactor );
 
 		// apply gravity before moving
 		_velocity.y += gravity * Time.deltaTime;
 
-		// if holding down bump up our movement amount and turn off one way platform detection for a frame.
-		// this lets uf jump down through one way platforms
-		if( _controller.isGrounded && Input.GetKey( KeyCode.DownArrow ) )
-		{
-			_velocity.y *= 3f;
-			_controller.ignoreOneWayPlatformsThisFrame = true;
-		}
-
 		_controller.move( _velocity * Time.deltaTime );
-
-		// grab our current _velocity to use as a base for all calculations
-		_velocity = _controller.velocity;
 	}
 
 }
